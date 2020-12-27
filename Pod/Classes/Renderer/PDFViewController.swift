@@ -113,6 +113,7 @@ open class PDFViewController: UIViewController {
         case .vertical:
             collectionView.isPagingEnabled = false
             pageScrubber.isHidden = true
+        default:break;
         }
         
         self.setupUI()
@@ -282,6 +283,7 @@ open class PDFViewController: UIViewController {
             }
         case .vertical:
             pageScrubber.isHidden = true
+        default:break;
         }
     }
     

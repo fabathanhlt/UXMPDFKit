@@ -98,6 +98,8 @@ open class PDFSinglePageViewer: UICollectionView {
             scrollToItem(at: indexPath, at: .centeredHorizontally, animated: animated)
         case .vertical:
             scrollToItem(at: indexPath, at: .top, animated: animated)
+        default:
+            break
         }
     }
 
@@ -161,7 +163,8 @@ extension PDFSinglePageViewer: UICollectionViewDelegateFlowLayout {
             let contentInsetHeight = contentInset.bottom + contentInset.top + 1
             size.height -= contentInsetHeight
             return size
-        case .vertical:
+        default:
+            //vertical
             let page = indexPath.row + 1
             let contentViewSize = PDFPageContentView(frame: bounds, document: document!, page: page).contentSize
 
@@ -206,9 +209,9 @@ extension PDFSinglePageViewer: UIScrollViewDelegate {
         switch scrollDirection {
         case .horizontal:
             page = Int((scrollView.contentOffset.x + scrollView.frame.width) / scrollView.frame.width)
-        case .vertical:
+        default:
             let currentlyShownIndexPath = indexPathsForVisibleItems.first ?? IndexPath(item: 0, section: 0)
-            page = currentlyShownIndexPath.row + 1
+            page = currentlyShownIndexPath.row + 1 
         }
 
         /// If nothing has changed, dont reload
